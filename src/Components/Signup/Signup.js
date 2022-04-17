@@ -5,6 +5,7 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-fi
 import { Link, useNavigate } from 'react-router-dom';
 import { sendEmailVerification } from 'firebase/auth';
 import signUP from '../../images/signUP.jpg'
+import { FcGoogle } from 'react-icons/fc';
 const Signup = () => {
     const [
         createUserWithEmailAndPassword,
@@ -58,7 +59,9 @@ const Signup = () => {
           Submit
         </Button>
         <p>Already registered? <Link className='link' to='/login'>Please login</Link></p>
-        <button className='another-btn' onClick={() => signInWithGoogle()}>Google sign in</button>
+        <button className='another-btn' onClick={() => signInWithGoogle()}><div className='d-flex align-items-center'><p className='me-2'><FcGoogle/></p>
+        <p>Google sign in</p>
+        </div></button>
       </Form>
 </div>
        </div>

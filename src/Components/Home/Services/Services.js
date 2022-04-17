@@ -9,7 +9,7 @@ const Services = () => {
 ]
     return (
         <div className='mt-4 mb-4'>
-        <h1 className='text-center container service-title'>Services</h1>
+        <h1 className='text-center container service-title font-lobster'>Services</h1>
           <div id='services' className="service-container text-center mx-auto w-100">
               <div className="row">
               {

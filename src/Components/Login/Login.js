@@ -7,6 +7,7 @@ import auth from '../../firebase.init';
 import rest from '../../images/rest.jpg'
 import 'react-toastify/dist/ReactToastify.css';
 import './Login.css'
+import { FcGoogle } from 'react-icons/fc';
 const Login = () => {
     const emailRef=useRef('')
       const passwordRef=useRef('')
@@ -63,9 +64,11 @@ const Login = () => {
         <Button className='red-button w-50' type="submit">
           Log in
         </Button><br />
-        <button className='link-button' onClick={handlePasswordReset}>Forget password?</button>
+        <button className='link-button' onClick={handlePasswordReset}>Forgot password?</button>
         <p>New to Margeret fox fitness? <Link className='link' to='/signup'>Please Signup</Link> </p>
-        <button className='another-btn' onClick={() => signInWithGoogle()}>Google sign in</button>
+        <button className='another-btn mx-2' onClick={() => signInWithGoogle()}><div className='d-flex align-items-center'><p className='me-2'><FcGoogle/></p>
+        <p>Google sign in</p>
+        </div></button>
       </Form>
       
           </div>

@@ -9,6 +9,7 @@ import About from './Components/About/About';
 import Blogs from './Components/Blogs/Blogs';
 import RequireAuth from './RequireAuth';
 import Checkout from './Components/Checkout/Checkout';
+import NotFound from './Components/NotFound/NotFound';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
     </RequireAuth>}>
 
     </Route>
+    <Route path='*' element={<NotFound></NotFound>}></Route>
   </Routes>
     </div>
   );
