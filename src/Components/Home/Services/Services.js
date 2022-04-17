@@ -3,18 +3,20 @@ import Service from './Service/Service';
 import './Services.css'
 const Services = () => {
     const services=[
-        {id:1, name: 'Dumble Press Bride On  Bosu', price: 5, description: 'something feels amazing' , image: 'https://ibb.co/bJvv1H2'},
-        {id:2, name: 'Dumble Muscle Fit', price: 5, description: 'something feels amazing', image:'https://www.google.com/search?q=gym+training+pictures&sxsrf=APq-WBsvCB4czKv6dZSCnL3yYkFa-f3RzQ:1650124473012&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjW9bHY-Jj3AhWIzDgGHbApAAcQ_AUoAXoECAEQAw&biw=1366&bih=625&dpr=1#imgrc=C38c4kn5NYZq4M'},
-        {id:3, name: 'Stretches And Crunches', price: 5, description: 'something feels amazing', image: 'https://www.google.com/search?q=gym+training+pictures&sxsrf=APq-WBsvCB4czKv6dZSCnL3yYkFa-f3RzQ:1650124473012&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjW9bHY-Jj3AhWIzDgGHbApAAcQ_AUoAXoECAEQAw&biw=1366&bih=625&dpr=1#imgrc=C38c4kn5NYZq4M'}
+        {id:1, name: 'Dumble Press Bosu', price: 5, description: 'something feels amazing' , image: 'https://i.ibb.co/8cxxMzd/bosuBall.jpg'},
+        {id:2, name: 'Dumble Muscle Fit', price: 5, description: 'something feels amazing', image:'https://i.ibb.co/Lp1hcHZ/muscle.jpg'},
+        {id:3, name: 'Stretches And Crunches', price: 5, description: 'something feels amazing', image: 'https://i.ibb.co/0mf6khC/stretch.jpg'}
 ]
     return (
         <div className='mt-4 mb-4'>
-        <h1 className='text-center'>Services</h1>
-          <div id='services' className="service-container text-center">
+        <h1 className='text-center container service-title'>Services</h1>
+          <div id='services' className="service-container text-center mx-auto w-100">
+              <div className="row">
               {
                   services.map(service=><Service key={service.id}
                   service={service}></Service>)
               }
+              </div>
           </div>
         </div>
     );
