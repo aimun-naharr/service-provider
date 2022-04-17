@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import auth from '../../firebase.init';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { sendEmailVerification } from 'firebase/auth';
 import signUP from '../../images/signUP.jpg'
@@ -27,6 +27,7 @@ const Signup = () => {
            navigate('/home')
       
       }
+      const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth)
 
     return (
        <div className="row w-100 mx-auto container align-items-center">
@@ -49,9 +50,7 @@ const Signup = () => {
         <Form.Group className="mb-3" controlId="formBasicPassword">
          <Form.Control ref={confirmPassRef} type="password" placeholder="Confirm Password" required/>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
+        
         {
             loading?<p>loading......</p>:''
         }
@@ -59,6 +58,7 @@ const Signup = () => {
           Submit
         </Button>
         <p>Already registered? <Link className='link' to='/login'>Please login</Link></p>
+        <button className='another-btn' onClick={() => signInWithGoogle()}>Google sign in</button>
       </Form>
 </div>
        </div>

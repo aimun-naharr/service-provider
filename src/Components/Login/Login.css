@@ -15,3 +15,17 @@
 .red-color{
     color: #dc1d24;
 }
+.link-button{
+    border: none;
+    background-color: #212529;
+    color: white;
+    margin: 0;
+    text-decoration: underline #dc1d24;
+}
+.another-btn{
+    border: none;
+    color: white;
+    padding: 5px 8px;
+    background-color: #3f4449;
+    border-radius: 5px;
+}

@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import auth from '../../firebase.init';
 import rest from '../../images/rest.jpg'
+import 'react-toastify/dist/ReactToastify.css';
 import './Login.css'
 const Login = () => {
     const emailRef=useRef('')
@@ -14,6 +16,10 @@ const Login = () => {
         loading,
         error,
       ] = useSignInWithEmailAndPassword(auth);
+      const [sendPasswordResetEmail, sending, passwordError] = useSendPasswordResetEmail(
+        auth
+      );
+      const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth)
       let location = useLocation();
       let from = location?.state?.from?.pathname || "/";
 
@@ -28,9 +34,15 @@ const Login = () => {
       if(user){
         navigate(from, { replace: true })
       }
+     const handlePasswordReset=async()=>{
+       const email= emailRef.current.value
+      await sendPasswordResetEmail(email);
+      toast('Email has been sent!');
+     }
      
     return (
-        <div className="row container w-100 mx-auto justify-center align-items-center mt-5">
+        <div>
+          <div className="row container w-100 mx-auto justify-center align-items-center mt-5">
           <div className="col-md-6">
               <img className='' src={rest} alt="" />
           </div>
@@ -47,16 +59,19 @@ const Login = () => {
           
           <Form.Control ref={passwordRef} type="password" placeholder="Password" required/>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
-       
+        
         <Button className='red-button w-50' type="submit">
           Log in
-        </Button>
+        </Button><br />
+        <button className='link-button' onClick={handlePasswordReset}>Forget password?</button>
         <p>New to Margeret fox fitness? <Link className='link' to='/signup'>Please Signup</Link> </p>
+        <button className='another-btn' onClick={() => signInWithGoogle()}>Google sign in</button>
       </Form>
+      
           </div>
+          
+        </div>
+        <ToastContainer/>
         </div>
     );
 };
