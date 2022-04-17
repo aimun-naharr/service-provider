@@ -2,12 +2,14 @@
     width: 300px;
     border: 1px solid gray;
     border-radius: 8px;
-    box-shadow:  20px 20px 60px gray,
-             -20px -20px 60px gray;
+    
 }
-.card-image{
-    border: 1px solid lightgray;
+.card-image img{
+    
     border-radius: 8px;
+}
+.service-info{
+    padding: 10px 0;
 }
 .card-button{
     width: 100px;
@@ -18,4 +20,8 @@
     color: white;
     border: none;
     border-radius: 5px;
+}
+.link{
+    text-decoration: none;
+    color: white;
 }

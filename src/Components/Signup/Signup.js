@@ -2,52 +2,66 @@ import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import auth from '../../firebase.init';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { sendEmailVerification } from 'firebase/auth';
+import signUP from '../../images/signUP.jpg'
 const Signup = () => {
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         error,
-      ] = useCreateUserWithEmailAndPassword(auth);
+      ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
       const navigate=useNavigate()
     
       const emailRef=useRef('')
       const passwordRef=useRef('')
       const confirmPassRef=useRef('')
-      const handleSignUp=(event)=>{
+      const handleSignUp=async(event)=>{
         event.preventDefault()
         const email= emailRef.current.value
         const password= passwordRef.current.value
-        createUserWithEmailAndPassword(email, password)
-       if(user){
+        await createUserWithEmailAndPassword(email, password)
+        await sendEmailVerification();
+        alert('Sent email');
            navigate('/home')
-       }
+      
       }
 
     return (
-        <Form onSubmit={handleSignUp} className='w-25 mx-auto mt-5'>
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-   
-    <Form.Control ref={emailRef} type="email" placeholder="Enter email" />
-    
-  </Form.Group>
+       <div className="row w-100 mx-auto container align-items-center">
+       <h1 className='text-center mb-3'>Sign <span className='red-color'>up!</span></h1>
+<div className="col-md-6">
+<img className='mt-4' src={signUP} alt="" />
+</div>
+<div className="col-md-6">
 
-  <Form.Group className="mb-3" controlId="formBasicPassword">
-   
-    <Form.Control ref={passwordRef} type="password" placeholder="Password" />
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formBasicCheckbox">
-    <Form.Check type="checkbox" label="Check me out" />
-  </Form.Group>
-  {
-      loading?<p>loading</p>:''
-  }
-  <Button variant="primary" type="submit">
-    Submit
-  </Button>
-</Form>
+<Form onSubmit={handleSignUp} className='w-75 mx-auto mt-5'>
+        
+       
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Control ref={emailRef} type="email" placeholder="Enter email" required/>
+          </Form.Group>
+      
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+         <Form.Control ref={passwordRef} type="password" placeholder="Password" required/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+         <Form.Control ref={confirmPassRef} type="password" placeholder="Confirm Password" required/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Form.Check type="checkbox" label="Check me out" />
+        </Form.Group>
+        {
+            loading?<p>loading......</p>:''
+        }
+        <Button className='red-button w-50' type="submit">
+          Submit
+        </Button>
+        <p>Already registered? <Link className='link' to='/login'>Please login</Link></p>
+      </Form>
+</div>
+       </div>
     );
 };
 
