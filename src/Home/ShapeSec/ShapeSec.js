@@ -2,8 +2,8 @@ import React from 'react';
 import getInShape from '../../images/getInShape.jpg'
 const ShapeSec = () => {
     return (
-        <div>
-            <div className="row container mx-auto align-items-center mt-5">
+        <div className='margin'>
+            <div className="row container mx-auto align-items-center">
                 <div className="col-md-6">
                     <img className='rounded w-75' src={getInShape} alt="" />
                 </div>
