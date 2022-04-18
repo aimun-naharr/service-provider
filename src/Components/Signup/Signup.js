@@ -29,7 +29,9 @@ const Signup = () => {
       
       }
       const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth)
-
+if(user|| googleUser){
+  navigate('/home')
+}
     return (
        <div className="row w-100 mx-auto container align-items-center">
        <h1 className='text-center mb-3'>Sign <span className='red-color'>up!</span></h1>

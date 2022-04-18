@@ -32,15 +32,24 @@ const Login = () => {
         signInWithEmailAndPassword(email, password)
         
       }
-      if(user){
+      if(user|| googleUser){
         navigate(from, { replace: true })
       }
+      
      const handlePasswordReset=async()=>{
        const email= emailRef.current.value
-      await sendPasswordResetEmail(email);
-      toast('Email has been sent!');
-     }
+       if(email){
+        await sendPasswordResetEmail(email);
+        toast('Email has been sent!');
+       }
+       else{
+         toast('please enter your email')
+       }
      
+     }
+     if(error || passwordError){
+      toast('something went wrong')
+     }
     return (
         <div>
           <div className="row container w-100 mx-auto justify-center align-items-center mt-5">
@@ -64,6 +73,7 @@ const Login = () => {
         <Button className='red-button w-50' type="submit">
           Log in
         </Button><br />
+       
         <button className='link-button' onClick={handlePasswordReset}>Forgot password?</button>
         <p>New to Margeret fox fitness? <Link className='link' to='/signup'>Please Signup</Link> </p>
         <button className='another-btn mx-2' onClick={() => signInWithGoogle()}><div className='d-flex align-items-center'><p className='me-2'><FcGoogle/></p>
